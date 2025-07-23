@@ -1,3 +1,15 @@
+# Next.js Project Setup and Basics.
+
+This project is a comprehensive introduction to setting up and working with Next.js, 
+TypeScript, and Tailwind CSS. It guides you through creating a modern web 
+application with reusable components, routing, API integration, 
+and proper project structure. The project covers fundamental 
+concepts from initial setup to building interactive components and fetching 
+data from external APIs.
+
+
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
 
 ## Getting Started
