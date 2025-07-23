@@ -2,7 +2,7 @@ import Image from "next/image"
 import HOUSE_IMAGE from "@/public/assets/images/house.png"
 import STAR_IMAGE from "@/public/assets/images/star.png"
 import React from "react"
-import {CardProps} from "@/interfaces"
+import {type CardProps} from "@/interfaces"
 
 const Card: React.FC<CardProps> = ({title,content}) => {
 
