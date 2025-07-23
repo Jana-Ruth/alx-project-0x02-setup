@@ -1,4 +1,4 @@
 export interface CardProps {
-    title : string
+    title : string,
     content : string
 }
