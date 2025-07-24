@@ -1,49 +1,40 @@
-import Header from "@/components/layout/Header"
-import React, { useEffect, useState } from "react";
+// pages/posts.tsx
+
+import React from "react";
 import PostCard from "@/components/common/PostCard";
 import { PostProps } from "@/interfaces";
-const Posts: React.FC = () => {
-     const [posts, setPosts] = useState<PostProps[]>([]);
-  const [loading, setLoading] = useState(true);
+import Header from "@/components/layout/Header";
 
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/posts?_limit=10")
-      .then((res) => res.json())
-      .then((data) => {
-        const formatted = data.map((post: any) => ({
-          userId: post.userId,
-          id: post.id,
-          title: post.title,
-          content: post.body,
-        }));
-        setPosts(formatted);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching posts:", err);
-        setLoading(false);
-      });
-  }, []);
-    return(
-        <div>
-            <Header/>
-<div className="p-6 space-y-6">
-      <h1 className="text-2xl font-bold">Posts</h1>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        posts.map((post) => (
-          <PostCard
-            key={post.id}
-            userId={post.userId}
-            title={post.title}
-            content={post.content}
-          />
-        ))
-      )}
-    </div>
-        </div>
-    )
+interface PostsPageProps {
+  posts: PostProps[];
 }
 
-export default Posts
+const Posts: React.FC<PostsPageProps> = ({ posts }) => {
+  return (
+    <div>
+      <Header/>
+    <div className="p-4">
+      <h1 className="text-3xl font-bold mb-4">Posts</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {posts.map((post) => (
+          <PostCard key={post.id} {...post} />
+        ))}
+      </div>
+    </div>
+    </div>
+  );
+};
+
+// ✅ This is what was missing
+export async function getStaticProps() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts?_limit=9");
+  const posts: PostProps[] = await res.json();
+
+  return {
+    props: {
+      posts,
+    },
+  };
+}
+
+export default Posts;
