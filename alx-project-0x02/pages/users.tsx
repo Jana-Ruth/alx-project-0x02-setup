@@ -1,25 +1,25 @@
-// pages/users/index.tsx
 import { GetStaticProps } from 'next';
 import UserCard from '@/components/common/UserCard';
 import { UserProps } from '@/interfaces';
 import Header from '@/components/layout/Header';
+import React from 'react';
 
 interface UsersPageProps {
   users: UserProps[];
 }
 
-const Users = ({ users }: UsersPageProps) => {
+const Users: React.FC<UsersPageProps> = ({ users }) => {
   return (
     <div>
-      <Header/>
-   
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Users</h1>
-      {users.map((user) => (
-        <UserCard key={user.id} user={user} />
-      ))}
+      <Header />
+
+      <div className="p-4">
+        <h1 className="text-2xl font-bold mb-4">Users</h1>
+        {users.map((user) => (
+          <UserCard key={user.id} user={user} />
+        ))}
+      </div>
     </div>
-     </div>
   );
 };
 
@@ -32,7 +32,7 @@ export const getStaticProps: GetStaticProps = async () => {
       props: {
         users,
       },
-      revalidate: 60, // Regenerate the page at most once every 60 seconds
+      revalidate: 60,
     };
   } catch (error) {
     console.error('Error fetching users:', error);
